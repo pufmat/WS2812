@@ -56,12 +56,12 @@
     "__Lbreak:"            "\n\t" /* break:           +0    */
 
 #define PUF_WS2812(NAME, PORT)                                 \
-    void NAME(uint8_t* data, int len, uint8_t pin){            \
+    void NAME(uint8_t* data, int len, uint8_t mask){           \
         volatile uint8_t  tmp  = 0;                            \
         volatile uint8_t* ptr  = data;                         \
         const    uint8_t* end  = data + len * 3;               \
-        const    uint8_t  high = PORT |  (1 << pin);           \
-        const    uint8_t  low  = PORT & ~(1 << pin);           \
+        const    uint8_t  high = PORT |  mask;                 \
+        const    uint8_t  low  = PORT & ~mask;                 \
                                                                \
         if(ptr == end){                                        \
             return;                                            \
